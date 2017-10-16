@@ -3,7 +3,7 @@ sample.googleMaps = sample.googleMaps || {};
 
 sample.googleMaps = function(module, polygons) {
 
-    var mapOptions = {
+    this.mapOptions = {
         center: new google.maps.LatLng(52.427548, -3.515625),
         zoom: 8,
         /* UI Controls settings */
@@ -29,23 +29,54 @@ sample.googleMaps = function(module, polygons) {
         },
         navigationControl: true
     };
-    var map = new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
 
-    module.CreateMap = function (options) {
+    /* Used to set the route between two addresses  */
+    this.directionsService = new google.maps.DirectionsService();
+
+    /* Used to allow the user get back to the initial position (and zoom level) on the map */
+    this.initialCenter = mapOptions.center;
+    this.initialZoom = mapOptions.zoom;
+
+    function createMap(options) {
         if (!options || !options.container) return null;
         
         var map = new google.maps.Map(document.getElementById(options.container), mapOptions);
 
         return map;
+    }
+
+    function createGeocoder(map) {
+        var geocoder = new google.maps.Geocoder();
+       // geocoder.setMap(map);
+        return geocoder;
+    }
+
+    function createDirectionsService(map) {
+        var directionsService = new google.maps.DirectionsService();
+
+        return directionsService;
+    }
+
+    function runSamples(options) {
+        polygons.addDirectionService(options.map, options.directionsService)
+        //polygons.addGeocoderAddress(options.map, options.geocoder);
+        polygons.addGoToInitialExtent(options.map, this.initialCenter, this.initialZoom);
+        //polygons.addShowCoords(options.map);
+        polygons.drawMarkers(options.map);
+        polygons.drawPolyline(options.map);
+        polygons.drawPolygon(options.map);
+        polygons.drawRectangle(options.map);
+        polygons.drawCircle(options.map);
     };
 
-    module.runSamples = function (map) {
-        polygons.drawMarkers(map);
-        polygons.drawPolyline(map);
-        polygons.drawPolygon(map);
-        polygons.drawRectangle(map);
-        polygons.drawCircle(map);
-    };
+    function initialize() {
+    }
+
+    module.initialize = initialize.bind(this);
+    module.createMap = createMap.bind(this);
+    module.createGeocoder = createGeocoder.bind(this);
+    module.createDirectionsService = createDirectionsService.bind(this);
+    module.runSamples = runSamples.bind(this);
 
     return module;
 }(sample.googleMaps || {}, sample.googleMaps.polygons);

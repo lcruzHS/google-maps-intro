@@ -18,6 +18,18 @@
         #mapDiv {
             height: 100%;
         }
+
+        #coordsDiv {
+            position: absolute;
+            background-color: white;
+            border: 1px solid black;
+            bottom: 50px;
+            right: 50px;
+            height: 50px;
+            width: 380px;
+            padding-top: 5px;
+            padding-left: 5px;
+        }
     </style>
     <!-- Access Google Maps API -->
     <script type="text/javascript"
@@ -25,11 +37,25 @@
     </script>
 </head>
 <body>
-    <!--<button id="btnTerrain">Terrain</button>
+    <button id="btnTerrain">Terrain</button>
     <button id="btnRoadmap">Roadmap</button>
     <button id="btnSatellite">Satellite</button>
-    <button id="btnHybrid">Hybrid</button>-->
+    <button id="btnHybrid">Hybrid</button>
+    
+    <!--<div>
+        <input id="address" type="text" value="HealthSTAR" style="width: 300px;" />
+        <input id="btnFindAddress" type="button" value="Find" />
+    </div>-->
+
+    <div>
+        <input id="start" type="text" value="" style="width: 300px;" />
+        <input id="btnFindRoute" type="button" value="Go" />
+    </div>
+    <div id="directionsPanel" style="float: right; width: 30%; height: 100%;">
+    </div>
+
     <div id="mapDiv"></div>
+    <!--<div id="coordsDiv"></div>-->
 </body>
 </html>
 
@@ -38,22 +64,28 @@
 
 <script type="text/javascript">
 	function initialize() {		
-	    var map = sample.googleMaps.CreateMap({ container: "mapDiv" });
+	    var map = sample.googleMaps.createMap({ container: "mapDiv" });
+	    var geocoder = sample.googleMaps.createGeocoder(map);
+	    var dirsService = sample.googleMaps.createDirectionsService(map);
 
-		addButtons(map);
+	    addButtons(map);
 
-		sample.googleMaps.runSamples(map);
+	    sample.googleMaps.runSamples({ map: map, geocoder: geocoder, directionsService: dirsService });
 	}	
 
 	function addButtons(map) {
-		//document.getElementById('btnTerrain').addEventListener('click',
-        //    function () { map.setMapTypeId(google.maps.MapTypeId.TERRAIN); });
-		//document.getElementById('btnRoadmap').addEventListener('click',
-        //    function () { map.setMapTypeId(google.maps.MapTypeId.ROADMAP); });
-		//document.getElementById('btnSatellite').addEventListener('click',
-        //    function () { map.setMapTypeId(google.maps.MapTypeId.SATELLITE); });
-		//document.getElementById('btnHybrid').addEventListener('click',
-        //    function () { map.setMapTypeId(google.maps.MapTypeId.HYBRID); });
+	    google.maps.event.addDomListener(btnTerrain, 'click',
+            function () {
+                map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+            });
+		/*document.getElementById('btnTerrain').addEventListener('click',
+            function () { map.setMapTypeId(google.maps.MapTypeId.TERRAIN); });*/
+		document.getElementById('btnRoadmap').addEventListener('click',
+            function () { map.setMapTypeId(google.maps.MapTypeId.ROADMAP); });
+		document.getElementById('btnSatellite').addEventListener('click',
+            function () { map.setMapTypeId(google.maps.MapTypeId.SATELLITE); });
+		document.getElementById('btnHybrid').addEventListener('click',
+            function () { map.setMapTypeId(google.maps.MapTypeId.HYBRID); });
 	}
 
 	google.maps.event.addDomListener(window, "load", initialize);
