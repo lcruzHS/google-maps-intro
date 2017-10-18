@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMaps", "GoogleMaps\GoogleMaps.csproj", "{BE1625EA-4944-4A20-98CF-87F70CC24AFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueCloudDS.MER360.GoogleMaps", "BlueCloudDS.MER360.GoogleMaps\BlueCloudDS.MER360.GoogleMaps.csproj", "{4F14971A-8939-491E-806D-FE0F4E98D790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueCloudDS.MER360.GoogleMaps.Console", "BlueCloudDS.MER360.GoogleMaps.Console\BlueCloudDS.MER360.GoogleMaps.Console.csproj", "{2EC92088-50DC-428C-9435-7FD080905116}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BE1625EA-4944-4A20-98CF-87F70CC24AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE1625EA-4944-4A20-98CF-87F70CC24AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE1625EA-4944-4A20-98CF-87F70CC24AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F14971A-8939-491E-806D-FE0F4E98D790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F14971A-8939-491E-806D-FE0F4E98D790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F14971A-8939-491E-806D-FE0F4E98D790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F14971A-8939-491E-806D-FE0F4E98D790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC92088-50DC-428C-9435-7FD080905116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC92088-50DC-428C-9435-7FD080905116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC92088-50DC-428C-9435-7FD080905116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC92088-50DC-428C-9435-7FD080905116}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
