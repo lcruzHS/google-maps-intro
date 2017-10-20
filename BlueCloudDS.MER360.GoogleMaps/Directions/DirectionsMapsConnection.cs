@@ -1,4 +1,5 @@
-﻿using BlueCloudDS.MER360.GoogleMaps.Model;
+﻿using BlueCloudDS.MER360.GoogleMaps.Interfaces;
+using BlueCloudDS.MER360.GoogleMaps.Model;
 using BlueCloudDS.MER360.GoogleMaps.Model.Maps;
 using Newtonsoft.Json;
 using System;
@@ -12,6 +13,7 @@ namespace BlueCloudDS.MER360.GoogleMaps.Directions
         private const string DIRECTIONS_ORIGIN = "origin";
         private const string DIRECTIONS_DESTINATION = "destination";
         private const string DIRECTIONS_WAYPOINTS = "waypoints";
+        private const string DIRECTIONS_TRAVEL_MODE = "mode";
 
         public DirectionsMapsConnection()
             : base(Properties.Settings.Default.Google_Maps_Directions_Api_Url)
@@ -34,6 +36,12 @@ namespace BlueCloudDS.MER360.GoogleMaps.Directions
                 }
 
             }
+
+            if(request.TravelMode != GoogleMaps.Interfaces.TravelModes.Unknown)
+            {
+                Parameters.Add(DIRECTIONS_TRAVEL_MODE, Enum.GetName(typeof(TravelModes), request.TravelMode).ToLowerInvariant());
+            }
+
             if (wayPointsBuilder.Count > 0)
             {
                 Parameters.Add(DIRECTIONS_WAYPOINTS, string.Join("|", wayPointsBuilder.ToArray()));
@@ -52,7 +60,6 @@ namespace BlueCloudDS.MER360.GoogleMaps.Directions
             }
             catch (Exception ex)
             {
-                //TODO: Log error here.
                 throw new ApplicationException("An error occurred trying to get directions for a set of locations.", ex);
             }
         }

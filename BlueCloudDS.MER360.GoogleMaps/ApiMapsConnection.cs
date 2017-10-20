@@ -41,10 +41,13 @@ namespace BlueCloudDS.MER360.GoogleMaps
         {
             try
             {
-                var uri = GetUri();
+                if (httpClient == null)
+                {
+                    var uri = GetUri();
 
-                HttpWebRequest http = (HttpWebRequest)WebRequest.Create(uri);
-                WebResponse response = http.GetResponse();
+                    httpClient = (HttpWebRequest)WebRequest.Create(uri);
+                }
+                WebResponse response = httpClient.GetResponse();
 
                 StreamReader sr = new StreamReader(response.GetResponseStream());
                 string content = sr.ReadToEnd();
@@ -116,6 +119,12 @@ namespace BlueCloudDS.MER360.GoogleMaps
         public virtual void Dispose(bool disposing)
         {
             if (!disposing) return;
+
+            if (httpClient != null)
+            {
+                httpClient.Abort();
+                httpClient = null;
+            }
         }
 
         public void Dispose()

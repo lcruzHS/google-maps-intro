@@ -15,6 +15,7 @@ namespace BlueCloudDS.MER360.GoogleMaps.Model
         public DirectionRequest(IEnumerable<LocationBase> locations, TravelModes travelMode = TravelModes.Unknown)
         {
             Locations = new List<LocationBase>(locations);
+            TravelMode = travelMode;
         }
 
         /// <summary>
