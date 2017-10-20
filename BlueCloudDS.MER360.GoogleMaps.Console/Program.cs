@@ -36,8 +36,23 @@ namespace BlueCloudDS.MER360.GoogleMaps.Console
 
             //var result =  Newtonsoft.Json.JsonConvert.DeserializeObject<DirectionsResult>(str);
 
+
+
+
             var result = conn.GetDirections<DirectionsResult>();
 
+            var route = result.Routes.FirstOrDefault();
+            var totalDistance = 0d;
+            if (null != route)
+            {
+                totalDistance = route.Legs.Aggregate(totalDistance, (distance, leg) => distance + leg.Distance.Value);
+            }
+
+            global::System.Console.WriteLine();
+            global::System.Console.WriteLine("Total distance is {0:#,#0.##} meters.", totalDistance);
+            global::System.Console.WriteLine("Total distance is {0:#,#0.##} miles.", Helpers.ConvertionHelpers.MetersToMiles(totalDistance));
+            global::System.Console.WriteLine("Total distance is {0:#,#0.##} Km.", Helpers.ConvertionHelpers.MetersToKilometers(totalDistance));
+            global::System.Console.WriteLine();
 
             global::System.Console.WriteLine("Press any key to finish...");
             global::System.Console.ReadKey();
