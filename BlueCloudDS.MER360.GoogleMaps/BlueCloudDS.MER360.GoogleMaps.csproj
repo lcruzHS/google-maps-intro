@@ -51,6 +51,7 @@
     <Compile Include="Directions\Interfaces\IEnd.cs" />
     <Compile Include="Directions\Interfaces\IStart.cs" />
     <Compile Include="Directions\Interfaces\IThenTo.cs" />
+    <Compile Include="Directions\Interfaces\IToSingle.cs" />
     <Compile Include="Helpers\ConvertionHelpers.cs" />
     <Compile Include="ApiMapsConnection.cs" />
     <Compile Include="Model\Address.cs" />

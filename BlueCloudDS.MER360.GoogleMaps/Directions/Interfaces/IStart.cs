@@ -16,6 +16,6 @@ namespace BlueCloudDS.MER360.GoogleMaps.Directions.Interfaces
         /// </summary>
         /// <param name="travelMode">Optional. The travel mode.</param>
         /// <returns>The <see cref="ITo"/> reference.</returns>
-        ITo Single(TravelModes travelMode = TravelModes.Unknown);
+        IToSingle Single(TravelModes travelMode = TravelModes.Unknown);
     }
 }

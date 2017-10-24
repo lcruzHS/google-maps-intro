@@ -36,5 +36,10 @@ namespace BlueCloudDS.MER360.GoogleMaps.Model
         {
             return string.Format("{0} {1} {2} {3} {4}", Street, City, Zip, State, Country);
         }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

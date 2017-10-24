@@ -29,5 +29,10 @@ namespace BlueCloudDS.MER360.GoogleMaps.Model
         {
             return string.Format("{0},{1}", Latitude, Longitude);
         }
+
+        public override object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

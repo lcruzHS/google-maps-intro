@@ -23,11 +23,11 @@ namespace BlueCloudDS.MER360.GoogleMaps.Console
 
 
             var conn = dirService
-                .Start()
+                .Single()                
                 //.From(new Point(40.730713, -73.994794))
-                .From(new Address("HealthSTAR Education Center"))
+                //.From(new Address("HealthSTAR Education Center"))
                 //.From(new Address("07430")) 
-                .Then(new Point(40.884822, -74.044930))
+                //.Then(new Point(40.884822, -74.044930))
                 //.Then(new Address(null, "Mahwah", null, "NJ", null))
                 .To(new Address(null, "West New York", null, "NJ", null))
                 .End(Interfaces.TravelModes.Walking);

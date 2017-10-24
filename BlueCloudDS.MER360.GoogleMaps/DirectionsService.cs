@@ -8,7 +8,7 @@ using BlueCloudDS.MER360.GoogleMaps.Directions;
 
 namespace BlueCloudDS.MER360.GoogleMaps
 {
-    public sealed class DirectionsService : IStart, IFrom, ITo, IThenTo, IEnd
+    public sealed class DirectionsService : IStart, IFrom, ITo, IToSingle, IThenTo, IEnd
     {
         List<LocationBase> _locations;
 
@@ -32,7 +32,7 @@ namespace BlueCloudDS.MER360.GoogleMaps
             return this;
         }
 
-        public ITo Single(TravelModes travelMode = TravelModes.Unknown)
+        public IToSingle Single(TravelModes travelMode = TravelModes.Unknown)
         {
             TravelMode = travelMode;
 
@@ -103,6 +103,30 @@ namespace BlueCloudDS.MER360.GoogleMaps
             return this;
         }
         #endregion //ITo members
+
+        #region IToSingle members
+
+        IEnd IToSingle.To(Point point)
+        {
+            if (point == null) throw new ArgumentNullException("point");
+
+            _locations.Add(point);
+            _locations.Add((Point)point.Clone());
+
+            return this;
+        }
+
+        IEnd IToSingle.To(Address address)
+        {
+            if (address == null) throw new ArgumentNullException("address");
+
+            _locations.Add(address);
+            _locations.Add((Address)address.Clone());// new Address(address.Street, address.City, address.Zip, address.State, address.Country));
+
+            return this;
+        }
+
+        #endregion //IToSingle members
 
         #region IEnd members
 
